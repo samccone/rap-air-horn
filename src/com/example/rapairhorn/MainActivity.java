@@ -14,6 +14,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Button btn1 = (Button)findViewById(R.id.button1);	
+		btn1.setSoundEffectsEnabled(false);
 		
 		btn1.setOnClickListener(new View.OnClickListener() {
 			@Override
