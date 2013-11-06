@@ -1,12 +1,16 @@
 package com.example.rapairhorn;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 
 public class MainActivity extends Activity {
@@ -19,12 +23,16 @@ public class MainActivity extends Activity {
 		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
 		Button btn1 = (Button)findViewById(R.id.button1);	
 		btn1.setSoundEffectsEnabled(false);
-		
-		btn1.setOnClickListener(new View.OnClickListener() {
+		final MediaPlayer mp1 = MediaPlayer.create(getBaseContext(), R.raw.rap_air_horn);  
+
+		btn1.setOnTouchListener(new OnTouchListener() {
 			@Override
-			public void onClick(View v) {
-				final MediaPlayer mp1 = MediaPlayer.create(getBaseContext(), R.raw.rap_air_horn);  
-		        mp1.start();
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					mp1.seekTo(0);
+					mp1.start();	
+				}
+		        return true;
 			}
 		});
 	}
